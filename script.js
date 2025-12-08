@@ -64,6 +64,16 @@ const getStarsHTML = (rank) => {
     return html;
 };
 
+// NEU: Holt das Icon der Webseite (Favicon API)
+const getFavicon = (url) => {
+    try {
+        const domain = new URL(url).hostname;
+        return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+    } catch (e) {
+        return ''; // Fallback, falls URL kaputt ist
+    }
+};
+
 // --- 5. PROGRESS BAR (Budget verbraucht) ---
 
 const updateProgressBar = (items) => {
@@ -96,7 +106,6 @@ const updateProgressBar = (items) => {
 // --- 6. RENDER ENGINE ---
 
 const calculateTotal = (items) => {
-    // Footer zeigt Summe der OFFENEN Wünsche
     const openItems = items.filter(item => !item.done);
     const total = openItems.reduce((sum, item) => sum + item.price, 0);
     document.getElementById('total-price').innerText = formatCurrency(total);
@@ -106,7 +115,6 @@ const renderWishes = () => {
     const grid = document.getElementById('wish-grid');
     grid.innerHTML = ''; 
 
-    // Nur noch Kategorie-Filter, keine Suche mehr
     let filteredData = wishData;
     if (currentFilter !== 'all') {
         filteredData = wishData.filter(item => item.category === currentFilter);
@@ -115,10 +123,25 @@ const renderWishes = () => {
     filteredData.forEach(item => {
         const card = document.createElement('article');
         card.className = `wish-card ${item.done ? 'done' : ''}`;
-        const shopText = item.shop ? item.shop : 'Zum Produkt';
+        
+        // 1. SHOP LOGIK: Text oder Icon?
+        const shopText = item.shop ? item.shop : 'Zum Shop';
+        const faviconUrl = getFavicon(item.link);
+        
+        // 2. PRIORITY LOGIK: Farbe und Text bestimmen
+        // Default ist 'medium', falls nichts im JSON steht
+        const priority = item.priority || 'medium'; 
+        const priorityMap = {
+            'high': 'Hoch',
+            'medium': 'Mittel',
+            'low': 'Niedrig'
+        };
+        const badgeLabel = priorityMap[priority];
+        const badgeClass = `badge-${priority}`;
 
         card.innerHTML = `
             <div class="image-container">
+                <span class="badge ${badgeClass}">${badgeLabel}</span>
                 <img src="${item.image}" alt="${item.title}">
             </div>
             <div class="content">
@@ -131,7 +154,10 @@ const renderWishes = () => {
                 <p class="description">${item.description}</p>
                 
                 <div class="actions">
-                    <a href="${item.link}" target="_blank" class="btn btn-link">${shopText}</a>
+                    <a href="${item.link}" target="_blank" class="btn btn-link">
+                        <img src="${faviconUrl}" class="shop-icon" onerror="this.style.display='none'">
+                        ${shopText}
+                    </a>
                     <button class="btn btn-check" onclick="toggleStatus(${item.id})">
                         ${item.done ? 'Erledigt ✓' : 'Markieren'}
                     </button>
@@ -142,8 +168,6 @@ const renderWishes = () => {
     });
 
     calculateTotal(filteredData);
-    
-    // Bar soll immer das gesamte Budget betrachten, unabhängig vom Filter
     updateProgressBar(wishData); 
 };
 
