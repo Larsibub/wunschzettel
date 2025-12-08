@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wunschzettel V2.0</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>Meine Wunschliste</h1>
+        
+        <div class="controls">
+            <button class="filter-btn active" data-filter="all">Alle</button>
+            <button class="filter-btn" data-filter="tech">Technik</button>
+            <button class="filter-btn" data-filter="home">Haushalt</button>
+            <button class="filter-btn" data-filter="hobby">Hobby</button>
+        </div>
+    </header>
+
+    <main class="wish-grid" id="wish-grid"></main>
+
+    <div class="total-bar">
+        <span>Gesamtsumme (offen):</span>
+        <span id="total-price">0,00 €</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

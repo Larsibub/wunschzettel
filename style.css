@@ -1,0 +1,179 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --accent: #bb86fc;
+    --accent-hover: #9955e8;
+    --success: #03dac6; /* Farbe für Erledigt-Status */
+    --star-color: #ffd700;
+    --border-radius: 12px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    padding: 2rem;
+    padding-bottom: 5rem; /* Platz für die Bottom Bar */
+}
+
+/* --- Controls & Filter --- */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: #fff;
+}
+
+/* --- Grid & Cards --- */
+.wish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wish-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+    position: relative; /* Für Status Badge */
+}
+
+/* Status: Erledigt (Klasse wird per JS gesetzt) */
+.wish-card.done {
+    opacity: 0.5;
+    filter: grayscale(0.8);
+    border-color: var(--success);
+}
+
+.wish-card.done .content h2 {
+    text-decoration: line-through;
+}
+
+.image-container {
+    width: 100%;
+    height: 200px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.price-tag {
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.stars { color: var(--star-color); letter-spacing: 2px; }
+
+.description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+    flex-grow: 1;
+}
+
+/* Buttons Area */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn {
+    flex: 1;
+    padding: 0.6rem;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.btn-link {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+.btn-link:hover { background: var(--accent); color: #fff; }
+
+.btn-check {
+    border: 1px solid var(--success);
+    color: var(--success);
+    background: transparent;
+}
+.btn-check:hover { background: var(--success); color: #000; }
+
+/* Text ändern wenn erledigt */
+.wish-card.done .btn-check {
+    background: var(--success);
+    color: #000;
+}
+
+/* --- Sticky Footer --- */
+.total-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e1e1e;
+    border-top: 1px solid var(--accent);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+#total-price { color: var(--accent); }
