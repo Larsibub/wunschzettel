@@ -1,13 +1,25 @@
 :root {
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
-    --text-main: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --accent: #bb86fc;
-    --accent-hover: #9955e8;
-    --success: #03dac6; /* Farbe für Erledigt-Status */
-    --star-color: #ffd700;
-    --border-radius: 12px;
+    /* Basis Dark Mode */
+    --bg-color: #050505; /* Fast reines Schwarz für besseren Kontrast zum Lila */
+    --card-bg: #101010;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    
+    /* SKYLINE / BLACKLIGHT STYLE */
+    /* Hier ist das neue "Blau-Lila-Dunkel" (Electric Indigo) */
+    --accent: #5e43f3;        
+    --accent-glow: #5e43f3;   
+    --accent-hover: #7a65ff;  /* Etwas heller für den Hover-Effekt */
+    
+    --success: #00ff9d;       /* Neon-Grün passt super zu Lila */
+    --star-color: #ffcc00;
+    --border-radius: 6px;     /* Noch etwas sportlicher */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -15,37 +27,79 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     padding: 2rem;
-    padding-bottom: 5rem; /* Platz für die Bottom Bar */
+    padding-bottom: 6rem; /* Etwas mehr Platz unten */
 }
 
 /* --- Controls & Filter --- */
 header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Breiter gezogen */
+    /* Lila Schein um die weiße Schrift */
+    text-shadow: 
+        0 0 10px var(--accent), 
+        0 0 25px var(--accent);
 }
 
 .controls {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 1rem;
+    gap: 15px; /* Etwas mehr Abstand zwischen den Buttons */
+    margin-top: 1.5rem;
     flex-wrap: wrap;
 }
 
+/* --- Filter Buttons (Nur Border Glow) --- */
 .filter-btn {
-    background: transparent;
-    border: 1px solid var(--text-muted);
+    background: transparent; /* Innen komplett durchsichtig */
+    border: 2px solid #333;  /* Im Ruhezustand dunkelgrauer Rand (dezent) */
     color: var(--text-muted);
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 24px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.filter-btn:hover, .filter-btn.active {
+/* HOVER STATUS: Nur Rahmen leuchtet, innen dunkel */
+.filter-btn:hover {
+    background-color: transparent; /* Innen bleibt dunkel! */
+    border-color: var(--accent);   /* Rahmen nimmt Farbe an */
+    color: #fff;                   /* Text wird weiß */
+    
+    /* Das Glühen nach AUSSEN */
+    box-shadow: 
+        0 0 10px var(--accent-glow), 
+        0 0 20px var(--accent-glow);
+        
+    transform: translateY(-2px);
+    text-shadow: 0 0 8px var(--accent);
+}
+
+/* ACTIVE STATUS: Der ausgewählte Button */
+.filter-btn.active {
+    background-color: transparent; /* Auch hier transparent lassen für den "Outline"-Look */
     border-color: var(--accent);
-    background-color: var(--accent);
     color: #fff;
+    
+    /* Intensiverer Glow für den aktiven Button */
+    box-shadow: 
+        0 0 15px var(--accent-glow), 
+        0 0 30px var(--accent-glow),
+        inset 0 0 10px rgba(94, 67, 243, 0.2); /* Ganz leichtes Leuchten nach innen */
+        
+    text-shadow: 0 0 10px var(--accent);
 }
 
 /* --- Grid & Cards --- */
@@ -61,33 +115,46 @@ header {
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     overflow: hidden;
-    border: 1px solid #333;
+    border: 1px solid #222; /* Sehr dunkler Rand im Normalzustand */
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s;
-    position: relative; /* Für Status Badge */
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* Status: Erledigt (Klasse wird per JS gesetzt) */
+/* Hover Effekt für die ganze Karte */
+.wish-card:hover {
+    border-color: var(--accent); /* Rahmen leuchtet lila */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
 .wish-card.done {
-    opacity: 0.5;
-    filter: grayscale(0.8);
-    border-color: var(--success);
+    opacity: 0.4;
+    filter: grayscale(0.9);
+    border-color: var(--success); /* Grün wenn erledigt */
 }
 
 .wish-card.done .content h2 {
     text-decoration: line-through;
+    color: var(--text-muted);
 }
 
 .image-container {
     width: 100%;
     height: 200px;
+    border-bottom: 1px solid #222;
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.wish-card:hover .image-container img {
+    transform: scale(1.05);
 }
 
 .content {
@@ -101,61 +168,91 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .price-tag {
     font-weight: bold;
     color: #fff;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+.stars { 
+    color: var(--star-color); 
+    letter-spacing: 2px;
     font-size: 1.1rem;
 }
 
-.stars { color: var(--star-color); letter-spacing: 2px; }
+.content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
 
 .description {
     color: var(--text-muted);
-    font-size: 0.9rem;
-    margin: 1rem 0;
+    font-size: 0.95rem;
+    margin: 0.5rem 0 1.5rem 0;
     flex-grow: 1;
+    line-height: 1.6;
 }
 
 /* Buttons Area */
 .actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-top: auto;
 }
 
 .btn {
     flex: 1;
-    padding: 0.6rem;
+    padding: 0.8rem;
     text-align: center;
-    border-radius: 6px;
+    border-radius: 4px;
     text-decoration: none;
     font-size: 0.9rem;
     cursor: pointer;
     border: none;
     font-family: inherit;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
 }
 
+/* Link Button im Neon Style */
 .btn-link {
+    background: transparent;
     border: 1px solid var(--accent);
     color: var(--accent);
 }
-.btn-link:hover { background: var(--accent); color: #fff; }
+
+.btn-link:hover { 
+    background: transparent;
+    color: #fff;
+    box-shadow: 0 0 15px var(--accent-glow);
+    text-shadow: 0 0 5px var(--accent);
+}
 
 .btn-check {
     border: 1px solid var(--success);
     color: var(--success);
     background: transparent;
 }
-.btn-check:hover { background: var(--success); color: #000; }
+
+.btn-check:hover { 
+    background: transparent; /* Auch hier: kein Füllen */
+    color: #fff; 
+    box-shadow: 0 0 15px var(--success);
+    text-shadow: 0 0 5px var(--success);
+}
 
 /* Text ändern wenn erledigt */
 .wish-card.done .btn-check {
-    background: var(--success);
+    background: var(--success); /* Hier füllen wir, damit man sieht: DONE */
     color: #000;
+    box-shadow: none;
 }
 
 /* --- Sticky Footer --- */
@@ -164,7 +261,8 @@ header {
     bottom: 0;
     left: 0;
     right: 0;
-    background: #1e1e1e;
+    background: rgba(16, 16, 16, 0.95); /* Leicht transparent */
+    backdrop-filter: blur(10px); /* Milchglas-Effekt */
     border-top: 1px solid var(--accent);
     padding: 1rem 2rem;
     display: flex;
@@ -172,8 +270,51 @@ header {
     align-items: center;
     font-size: 1.2rem;
     font-weight: bold;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.8);
     z-index: 100;
 }
 
-#total-price { color: var(--accent); }
+#total-price { 
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent);
+}
+
+/* --- MOBILE OPTIMIERUNG --- */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+        padding-bottom: 6rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .controls {
+        gap: 10px;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Scrollbar verstecken für cleaner look */
+    .controls::-webkit-scrollbar {
+        display: none;
+    }
+
+    .wish-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .image-container {
+        height: 180px;
+    }
+    
+    .total-bar {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
