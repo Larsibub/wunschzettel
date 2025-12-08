@@ -9,17 +9,23 @@
 </head>
 <body>
 
-    <header>
-        <h1>Meine Wunschliste</h1>
-        
-        <div class="controls">
-            <button class="filter-btn active" data-filter="all">Alle</button>
-            <button class="filter-btn" data-filter="tech">Technik</button>
-            
-            <button class="filter-btn" data-filter="home">Zuhause</button>
-            <button class="filter-btn" data-filter="else">Sonstiges</button>
-        </div>
-    </header>
+ <header>
+    <h1 data-text="MEINE WUNSCHLISTE">MEINE WUNSCHLISTE</h1>
+
+    <div class="controls">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="tech">Technik</button>
+        <button class="filter-btn" data-filter="sport">Sport</button>
+        <button class="filter-btn" data-filter="else">Sonstiges</button>
+    </div>
+</header>
+
+<div class="progress-container">
+    <div class="progress-label">Fortschritt: <span id="progress-text">0%</span></div>
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+</div>
 
     <main class="wish-grid" id="wish-grid"></main>
 

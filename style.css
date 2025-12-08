@@ -28,6 +28,8 @@ body {
     color: var(--text-main);
     padding: 2rem;
     padding-bottom: 6rem; /* Etwas mehr Platz unten */
+    background: radial-gradient(circle at top left, #1a0b2e, #000000);
+    min-height: 100vh;
 }
 
 /* --- Controls & Filter --- */
@@ -46,6 +48,57 @@ header h1 {
     text-shadow: 
         0 0 10px var(--accent), 
         0 0 25px var(--accent);
+}
+
+header h1 {
+    position: relative;
+    color: #fff;
+    /* Deinen existierenden Shadow behalten */
+    text-shadow: 0 0 10px var(--accent); 
+}
+
+/* Der Glitch-Effekt beim Hovern (oder immer, wenn du magst) */
+header h1:hover::before,
+header h1:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color); /* Muss Hintergrundfarbe haben */
+}
+
+header h1:hover::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff00c1; /* Pinker Versatz */
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 0.5s infinite linear alternate-reverse;
+}
+
+header h1:hover::after {
+    left: -2px;
+    text-shadow: -1px 0 #00fff9; /* Cyan Versatz */
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 0.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(10px, 9999px, 30px, 0); }
+    20% { clip: rect(80px, 9999px, 100px, 0); }
+    40% { clip: rect(10px, 9999px, 50px, 0); }
+    60% { clip: rect(40px, 9999px, 70px, 0); }
+    80% { clip: rect(20px, 9999px, 60px, 0); }
+    100% { clip: rect(50px, 9999px, 90px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(60px, 9999px, 80px, 0); }
+    20% { clip: rect(10px, 9999px, 30px, 0); }
+    40% { clip: rect(90px, 9999px, 100px, 0); }
+    60% { clip: rect(15px, 9999px, 40px, 0); }
+    80% { clip: rect(60px, 9999px, 85px, 0); }
+    100% { clip: rect(30px, 9999px, 50px, 0); }
 }
 
 .controls {
@@ -120,6 +173,16 @@ header h1 {
     flex-direction: column;
     transition: all 0.3s ease;
     position: relative;
+
+    /* Halbtransparentes Schwarz */
+    background-color: rgba(20, 20, 20, 0.7); 
+    /* Der Blur-Effekt (Milchglas) */
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Feiner weißer Rand für Definition */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* Hover Effekt für die ganze Karte */
@@ -279,6 +342,64 @@ header h1 {
     text-shadow: 0 0 10px var(--accent);
 }
 
+/* Nitro Bar Style */
+.progress-container {
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+}
+
+.progress-label {
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden; /* Damit der innere Balken nicht übersteht */
+    border: 1px solid #333;
+    box-shadow: inset 0 0 5px #000;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%; /* Startet bei 0, wird via JS geändert */
+    background-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width 0.5s ease-out;
+}
+
+
+/* Animation für den Ladebalken-Effekt */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-card {
+    background: #1a1a1a;
+    border-radius: 6px;
+    height: 400px; /* Ungefähre Höhe einer Karte */
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Der wandernde Lichteffekt */
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+
 /* --- MOBILE OPTIMIERUNG --- */
 @media (max-width: 768px) {
     body {
@@ -318,3 +439,4 @@ header h1 {
         font-size: 1rem;
     }
 }
+
