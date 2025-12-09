@@ -14,13 +14,13 @@
     },
     {
         "id": 2,
-        "title": "Staedtler Noris Digital",
+        "title": "Staedtler Noris Digital Jumbo",
         "priority": "high",
         "price": 35.54,
         "category": "tech",
         "rank": 5,
         "shop": "Galaxus",
-        "link": "https://www.galaxus.de/",
+        "link": "https://www.galaxus.de/de/s1/product/staedtler-noris-digital-jumbo-stylus-14676787?supplier=2705624&utm_source=google&utm_medium=cpc&utm_campaign=Prod_DE_Standardshopping_Branded_Search&campaignid=22759831347&adtype=pla&adgroupid=177310981330&adid=762524198115&dgCidg=Cj0KCQiArt_JBhCTARIsADQZaynfbI9ebDREosS-K-vTGF7sHwqjgpmARxQLgIUsb6UXXKVigtTNtnMaAoOlEALw_wcB&gclsrc=aw.ds&gad_source=1&gad_campaignid=22759831347&gbraid=0AAAAAC7ye-6by4h04kIbdwFAuMSjBQkl2&gclid=Cj0KCQiArt_JBhCTARIsADQZaynfbI9ebDREosS-K-vTGF7sHwqjgpmARxQLgIUsb6UXXKVigtTNtnMaAoOlEALw_wcB",
         "image": "https://static01.galaxus.com/productimages/5/1/5/7/2/2/6/3/4/4/6/7/9/1/6/9/5/4/8/019ae3ef-e4ec-76f3-8f47-89282e4602b0_720.avif",
         "description": "Stift für Galaxy Book",
         "done": false
@@ -33,7 +33,7 @@
         "category": "sport",
         "rank": 4,
         "shop": "Pinguine",
-        "link": "https://www.pinguine-shop.de/",
+        "link": "https://www.pinguine-shop.de/krefeld-pinguine-authentic-2025-26-home-43-weiss-gr/p-59437.html",
         "image": "https://www.pinguine-shop.de/images/products/gross/os_kev_trikot2526_home.jpg",
         "description": "Krefeld Pinguine Authentic Trikot",
         "done": false
@@ -46,7 +46,7 @@
         "category": "else",
         "rank": 5,
         "shop": "Nike",
-        "link": "https://www.nike.com/de/",
+        "link": "https://www.nike.com/de/t/air-force-1-07-herrenschuh-E5NnNyBr/CW2288-111",
         "image": "https://m.media-amazon.com/images/I/618FhFPg8+L._AC_UY900_.jpg",
         "description": "Nike Air Force 1",
         "done": false
@@ -59,7 +59,7 @@
         "category": "sport",
         "rank": 2,
         "shop": "Unisport",
-        "link": "https://www.unisportstore.de/",
+        "link": "https://www.unisportstore.de/schienbeinschoner/nike-schienbeinschoner-mercurial-lite-schwarzweiss/259278/?dfw=5898&feed=13111&utm_source=google&utm_medium=cpc&utm_campaign=de%20%2F%2F%20shopping%20%2F%2F%20generics%20%2B%20brand%20%2F%2F%20roas&utm_id=740906350&gad_source=1&gad_campaignid=740906350&gbraid=0AAAAADfOE3CIJpmBC0MA5OUkM3c2SDKRU&gclid=Cj0KCQiArt_JBhCTARIsADQZaylmr-5kLUN08PEbSFpatGTjkATUyQ6qObDFV3BSz1DeRMMH_Esov-UaAgxcEALw_wcB",
         "image": "https://thumblr.uniid.it/product/259278/666ce2cc1ca6.jpg?width=1920&format=webp&q=75",
         "description": "Mercurial Lite - Schwarz/Weiß",
         "done": false
